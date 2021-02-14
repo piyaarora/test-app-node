@@ -19,7 +19,7 @@ const App = () =>{
   const handleSubmit = () =>{
     axios.get('http://localhost:3000/tweets/post', tweet)
     .then((res) => {
-      console.log('user registered', res);
+      console.log('tweet added', res);
       setTweet({   
        tweetText:''
       })
@@ -36,7 +36,7 @@ const App = () =>{
             <h2>Welcome back,</h2>
             <label>
               <span>Type hashtag</span>
-              <input type="text" name="tweettext" value={tweet.tweetText} onClick={handleChange} />
+              <input type="text" name="tweetText" value={tweet.tweetText} onChange={handleChange} />
             </label>
             <button type="button" className="submit" onSubmit={handleSubmit}>Search</button>
           </div>
