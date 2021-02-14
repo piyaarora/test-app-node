@@ -17,7 +17,7 @@ const App = () =>{
   }
 
   const handleSubmit = () =>{
-    axios.get('http://localhost:3000/tweets/post', tweet)
+    axios.post('http://localhost:3000/tweets/post', tweet)
     .then((res) => {
       console.log('tweet added', res);
       setTweet({   
