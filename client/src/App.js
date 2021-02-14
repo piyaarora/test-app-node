@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react'
 
-function App() {
-  return (
+import './App.css';
+import axios from 'axios';
+
+const App = () =>{
+  const [tweet,setTweet] = useState({
+    tweetText:'',
+  
+  })
+  const handleChange =(e)=>{
+    setTweet({
+      ...tweet,
+      [e.target.name] : e.target.value
+    })
+  
+  }
+
+  const handleSubmit = () =>{
+    axios.get('http://localhost:3000/tweets/post', tweet)
+    .then((res) => {
+      console.log('user registered', res);
+      setTweet({   
+       tweetText:''
+      })
+    })
+    .catch((err) => {
+      console.log('err', err);
+    })
+  }
+
+  return(
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+        <div className="cont">
+          <div className="form sign-in">
+            <h2>Welcome back,</h2>
+            <label>
+              <span>Type hashtag</span>
+              <input type="text" name="tweettext" value={tweet.tweetText} onClick={handleChange} />
+            </label>
+            <button type="button" className="submit" onSubmit={handleSubmit}>Search</button>
+          </div>
+        </div>
+
+     </div>
+  
+  )
 }
+
 
 export default App;
